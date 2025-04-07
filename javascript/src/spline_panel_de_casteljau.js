@@ -29,8 +29,8 @@ class SplinePanel extends Panel {
     }
 
     /**
-    * Handle the mouse move event.
-    */
+     * Handle the mouse move event.
+     */
     onMouseMove(mouse) {
         if (this._selectedPoint != null) {
             this._selectedPoint.x = mouse.x;
@@ -68,7 +68,15 @@ class SplinePanel extends Panel {
         context.fillStyle = "#FFF";
         context.fillRect(0, 0, this.width, this.height);
         this.drawPoints(context, this._points);
-        this.draw2dFunction(context, 0, 1, 1 / 1000, t => this.deCasteljauApproximation(this._points, t).x, t => this.deCasteljauApproximation(this._points, t).y, "#FF00FF");
+        this.draw2dFunction(
+            context,
+            0,
+            1,
+            1 / 1000,
+            (t) => this.deCasteljauApproximation(this._points, t).x,
+            (t) => this.deCasteljauApproximation(this._points, t).y,
+            "#FF00FF"
+        );
         this.deCasteljauIteration(context);
     }
 
@@ -100,17 +108,17 @@ class SplinePanel extends Panel {
         let t = this._slider.value;
         let iterationControl = structuredClone(this._points);
 
-
         for (let i = 0; i < this._points.length; i++) {
             let newControlPoints = [];
             for (let j = 1; j < iterationControl.length; j++) {
                 this.drawSegment(iterationControl[j - 1], iterationControl[j]);
                 newControlPoints.push({
                     x: (1 - t) * iterationControl[j - 1].x + t * iterationControl[j].x,
-                    y: (1 - t) * iterationControl[j - 1].y + t * iterationControl[j].y
+                    y: (1 - t) * iterationControl[j - 1].y + t * iterationControl[j].y,
                 });
             }
-            if (i == this._points.length - 1) this.drawPoints(context, iterationControl, "#FF0000");
+            if (i == this._points.length - 1)
+                this.drawPoints(context, iterationControl, "#FF0000");
             else if (i > 0) this.drawPoints(context, iterationControl, "#00FF00");
             iterationControl = newControlPoints;
         }
@@ -171,11 +179,10 @@ class SplinePanel extends Panel {
         context.beginPath();
         context.moveTo(point.x - POINT_RADIUS, point.y);
         context.lineTo(point.x + POINT_RADIUS, point.y);
-        context.stroke()
+        context.stroke();
         context.beginPath();
         context.moveTo(point.x, point.y - POINT_RADIUS);
         context.lineTo(point.x, point.y + POINT_RADIUS);
-        context.stroke()
+        context.stroke();
     }
 }
-

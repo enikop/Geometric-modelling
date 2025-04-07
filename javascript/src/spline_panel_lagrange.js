@@ -29,8 +29,8 @@ class SplinePanel extends Panel {
     }
 
     /**
-    * Handle the mouse move event.
-    */
+     * Handle the mouse move event.
+     */
     onMouseMove(mouse) {
         if (this._selectedPoint != null) {
             this._selectedPoint.x = mouse.x;
@@ -68,7 +68,14 @@ class SplinePanel extends Panel {
         context.fillStyle = "#FFF";
         context.fillRect(0, 0, this.width, this.height);
         this.drawPoints(context, this._points);
-        this.draw2dFunction(context, 0, this._points.length - 1, (this._points.length - 1) / 1000, t => this.lagrangeInterpolation(t).x, t => this.lagrangeInterpolation(t).y);
+        this.draw2dFunction(
+            context,
+            0,
+            this._points.length - 1,
+            (this._points.length - 1) / 1000,
+            (t) => this.lagrangeInterpolation(t).x,
+            (t) => this.lagrangeInterpolation(t).y
+        );
     }
 
     // Lesson 2 Lagrange interpolation
@@ -135,11 +142,10 @@ class SplinePanel extends Panel {
         context.beginPath();
         context.moveTo(point.x - POINT_RADIUS, point.y);
         context.lineTo(point.x + POINT_RADIUS, point.y);
-        context.stroke()
+        context.stroke();
         context.beginPath();
         context.moveTo(point.x, point.y - POINT_RADIUS);
         context.lineTo(point.x, point.y + POINT_RADIUS);
-        context.stroke()
+        context.stroke();
     }
 }
-
