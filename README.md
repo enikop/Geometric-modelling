@@ -36,7 +36,7 @@ Investigation of different approximation and interpolation curves as activation 
 - [ ] Catmull-Rom or Overhauser spline activation layer
 - [x] Visualizations
 - [x] Simple example approximating a sine function, without weights in linear layers
-- [ ] Simple experiment with a few features ([Graduate Admissions dataset](https://www.kaggle.com/datasets/mohansacharya/graduate-admissions))
+- [x] Simple experiment with a few features ([Graduate Admissions dataset](https://www.kaggle.com/datasets/mohansacharya/graduate-admissions))
 - [ ] Complex experiment (on MNIST?) with measurements recorded for all learnable activations + ReLU
 
 ## Other interesting things to see
@@ -44,3 +44,9 @@ Investigation of different approximation and interpolation curves as activation 
     * guess: not necessarily
 * Are spline activations more effective in separating circularly separable 2D points (concentric circles) than ReLU?
     * guess: they must be - Is the time penalty worth it?
+
+## Result summary
+* [Report on the results](/assignment/README.md)
+* [Experiments with same curve parameters per layer](/assignment/Learnable_activation_functions_per_layer.ipynb)
+* [Experiments with different curves on each neuron](/assignment/Learnable_activation_functions_per_neuron.ipynb)
+* [Failed attempt at creating a Catmull-Rom activation function](/assignment/The_big_catmull_rom_failure.ipynb) (Abandoned for now, will try again later)
