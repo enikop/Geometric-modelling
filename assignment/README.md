@@ -41,7 +41,7 @@ Lagrange:
 All of these layers were tested on a simple sine function approximation task, using minimal NN architectures and matplotlib for visualization. 
 
 ### Experiment 1 - Graduate admissions
-The usability of the learnable activation layers has been tested using the Graduate Admissions dataset, focusing on predicting the probability of admission based on a student's achievements (GPA, language exams...). The dataset was not subjected to any balancing before training. First, a 2:8 test-other split was carried out, then a 1:9 validation-train split on the *other* set. As a result, the networks were trained on 400 entries, of which 40 was used exclusively for validation. The remaining 100 records were used for subsequent testing. \
+The usability of the learnable activation layers has been tested using the Graduate Admissions dataset, focusing on predicting the probability of admission based on a student's achievements (GPA, language exams...). The dataset was not subjected to any balancing before training. First, a 2:8 test-other split was carried out, then a 1:9 validation-train split on the *other* set. As a result, the networks were trained on 400 entries, of which 40 was used exclusively for validation. The remaining 100 records were used for subsequent testing.
 
 Four separate neural networks were constructed for this task:
  - one using ReLU activation (control), 
@@ -60,6 +60,8 @@ Each of these networks had the same basic architecture:
  - sigmoid activation to get probability values between 0 and 1
 
 *Dropout layers were only included in the case of per neuron parametrised activation functions, as networks working with these tended to overfit otherwise.*
+
+In the training process, the optimizer used was Adam with a learning rate of 0.01 and the loss metric was MSE (regression task). Training was done in a maximum of 1000 epochs, with early stopping after 50 epochs of no improvement on validation loss.
 
 #### Parameters per layer
 The results of an example run:
@@ -113,6 +115,8 @@ For this experiment, simple minimal network structures were employed and NURBS a
 1. By adding more layers, thereby more activation functions with more parameters
 2. Increasing the parameter count of existing activation functions by increasing the control point number parameter of the NURBS layers
 
+In the training process, the optimizer used was Adam with a learning rate of 0.01 and the loss metric was MSE (regression task). Training was done in a maximum of 1000 epochs, with early stopping after 50 epochs of no improvement on validation loss.
+
 #### Parameters per layer
 Here, the parameter count remained between 350-400 trainable parameters. \
 The results of an example run:
@@ -147,9 +151,11 @@ This first row of the table highlights the fact that with learnable per-neuron a
 ### Experiment 3 - Concentric circles
 A simple dataset created with the make_circles() function was separated using B-spline, NURBS and ReLU activations, in a single-layer, 2-neuron setup, with per-neuron activation functions. After training, decision boundaries were visualized to show the power of learnable activation functions. While the ReLU activation function separated the plane in straight lines, B-spline and NURBS activations managed to create curvy, quasi-circular decision boundaries, even with the limited number of layers and neurons involved.
 
+In the training process, the optimizer used was Adam with a learning rate of 0.01 and the loss metric was binary cross-entropy (two-class classification task). Training was done in 500 epochs, with no early stopping on a set of 1000 2-dimensional points.
+
 ReLU | B-spline | NURBS
 --- | --- |---
-![decision boundary relu](db_relu.jpg) | ![decision boundary b-spline](db_bspline.jpg) | ![decision boundary nurbs](db_nurbs.jpg)
+![decision boundary relu](figures/db_relu.jpg) | ![decision boundary b-spline](figures/db_bspline.jpg) | ![decision boundary nurbs](figures/db_nurbs.jpg)
 
 ## Main takeaways
 - The per-neuron setup of learnable activation layers seems to be more promising than the per-layer one.
